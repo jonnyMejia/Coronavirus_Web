@@ -1,17 +1,14 @@
-# Library for the WebScrapping
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup # Library for the WebScrapping
 import requests # Library for HTTP
 import pandas as ps # Library to use Dataframes objects
 import datetime as dt # Library to manage tiempos y fechas
 import numpy as np # Library to realize
-# Url of the page
-url = 'https://www.worldometers.info/coronavirus/'
 
-# To get Html 
-html = requests.get(url)
+url = 'https://www.worldometers.info/coronavirus/' # Url of the page
 
 def scrapping(url):
     "to get dataset from the url"
+    html = requests.get(url) # To get Html 
     page = BeautifulSoup(html.content,"html.parser") # To get web page in Html
     table = page.find('table' , {'id':'main_table_countries_today' }) # To get table from the HTML with id 
     thead =  page.find('thead').find('tr') # To get thead from the table
@@ -65,6 +62,7 @@ def clearDataset(dataset):
                 dataset[i]=dataset[i].str.replace(",","").astype(float)
             except:
                 pass
+    return 
 
 
 # call to function scrapping()
